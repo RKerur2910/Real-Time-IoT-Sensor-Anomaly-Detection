@@ -28,3 +28,51 @@ This project focuses on **production-style stability**:
 ---
 
 ## Architecture
+
+MQTT Sensor Stream
+↓
+Rolling Window Buffer
+↓
+Feature Engineering (mean, std, slope, deltas)
+↓
+Isolation Forest Scoring
+↓
+Percentile Threshold Calibration
+↓
+Alert Smoothing + Root-Cause Heuristics
+↓
+Stable Anomaly Alerts
+
+
+---
+
+## ML Approach
+
+### Model
+- **Isolation Forest** (unsupervised)
+- Works well when anomalies are rare and labeled examples are unavailable.
+
+### Feature Engineering (per rolling window)
+- Mean
+- Standard deviation
+- Slope (trend)
+- Deltas / first differences
+
+### Thresholding
+- **Percentile-based threshold calibration** (more robust than static thresholds)
+
+### Stability + Interpretability
+- Alert smoothing to reduce flapping
+- Simple heuristics to explain likely root-cause features (e.g., sudden delta spikes)
+
+---
+
+## Tech Stack
+
+- **Python**
+- **scikit-learn** (Isolation Forest)
+- **Pandas / NumPy**
+- **MQTT** (stream ingestion / simulation)
+
+---
+
